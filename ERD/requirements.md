@@ -86,3 +86,4 @@ This document outlines the **Entity-Relationship Diagram (ERD)** for an Airbnb-l
 Below is the ER diagram exported from Visual Paradigm:
 
 ![ER Diagram](./airbnb-erd.jpg)
+
