@@ -2,7 +2,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ============================
--- Role Table (for User roles)
+-- Role Table (for user roles)
 -- ============================
 CREATE TABLE Role (
     role_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -27,9 +27,9 @@ CREATE TABLE PaymentMethod (
 );
 
 -- ============================
--- User Table
+-- Users Table
 -- ============================
-CREATE TABLE User (
+CREATE TABLE users (
     user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE User (
     phone_number VARCHAR(20),
     role_id UUID NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES Role(role_id)
+    CONSTRAINT fk_users_role FOREIGN KEY (role_id) REFERENCES Role(role_id)
 );
 
-CREATE INDEX idx_user_email ON User(email);
+CREATE INDEX idx_users_email ON users(email);
 
 -- ============================
 -- Property Table
@@ -55,7 +55,7 @@ CREATE TABLE Property (
     price_per_night DECIMAL(10, 2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_property_host FOREIGN KEY (host_id) REFERENCES User(user_id)
+    CONSTRAINT fk_property_host FOREIGN KEY (host_id) REFERENCES users(user_id)
 );
 
 CREATE INDEX idx_property_host ON Property(host_id);
@@ -72,7 +72,7 @@ CREATE TABLE Booking (
     total_price DECIMAL(10, 2) NOT NULL,
     status_id UUID NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_booking_user FOREIGN KEY (user_id) REFERENCES User(user_id),
+    CONSTRAINT fk_booking_user FOREIGN KEY (user_id) REFERENCES users(user_id),
     CONSTRAINT fk_booking_property FOREIGN KEY (property_id) REFERENCES Property(property_id),
     CONSTRAINT fk_booking_status FOREIGN KEY (status_id) REFERENCES BookingStatus(status_id)
 );
@@ -106,7 +106,7 @@ CREATE TABLE Review (
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_review_property FOREIGN KEY (property_id) REFERENCES Property(property_id),
-    CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES User(user_id)
+    CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 -- ============================
@@ -118,6 +118,6 @@ CREATE TABLE Message (
     recipient_id UUID NOT NULL,
     message_body TEXT NOT NULL,
     send_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_sender FOREIGN KEY (sender_id) REFERENCES User(user_id),
-    CONSTRAINT fk_recipient FOREIGN KEY (recipient_id) REFERENCES User(user_id)
+    CONSTRAINT fk_sender FOREIGN KEY (sender_id) REFERENCES users(user_id),
+    CONSTRAINT fk_recipient FOREIGN KEY (recipient_id) REFERENCES users(user_id)
 );

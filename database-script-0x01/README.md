@@ -29,7 +29,7 @@ The schema was designed as part of the **ALX Airbnb Database Module** and follow
   - `CHECK` (e.g., rating between 1–5)
   - Foreign key references with cascading relationships
 - **Indexing**:
-  - `email` in `User`
+  - `email` in `Users`
   - `property_id`, `booking_id` for performance-critical joins
 
 ---
@@ -39,7 +39,7 @@ The schema was designed as part of the **ALX Airbnb Database Module** and follow
 | Table           | Description                              |
 |----------------|------------------------------------------|
 | `Role`          | Lookup table for user roles (guest, host, admin) |
-| `User`          | Stores user data, linked to `Role`       |
+| `Users`          | Stores user data, linked to `Role`       |
 | `Property`      | Listings created by hosts                |
 | `Booking`       | Reservations by users for properties     |
 | `BookingStatus` | Lookup for booking status values         |
