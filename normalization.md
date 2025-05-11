@@ -75,3 +75,4 @@ The Airbnb database design strictly adheres to 3NF by:
 - Removing transitive dependencies using lookup tables (3NF)
 
 This structure provides a strong foundation for schema creation and real-world data operations.
+
