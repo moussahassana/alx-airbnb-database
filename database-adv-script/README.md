@@ -5,3 +5,8 @@ This file contains SQL queries demonstrating the use of INNER JOIN, LEFT JOIN, a
 Contains examples of non-correlated and correlated subqueries:
     - Properties with average rating > 4.0
     - Users with more than 3 bookings
+
+### aggregations_and_window_functions.sql
+Includes queries to:
+    - Count total bookings per user
+    - Rank properties by number of bookings using window functions
